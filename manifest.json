@@ -1,0 +1,16 @@
+{  
+  "name": "Nice",
+  "chrome_url_overrides": {
+     "newtab": "index.html"
+  },
+  "manifest_version": 2,
+  "version": "0.1",  
+  "description": "定制导航",
+  "browser_action": {
+    "default_icon": "img/navigation.png" ,
+    "default_title": "My Navigation",
+    "default_popup": "popup.html"
+  },
+  "options_page":"options.html",
+  "permissions": [ "background", "geolocation", "management", "topSites", "bookmarks", "unlimitedStorage", "topSites", "identity", "http://*/", "https://*/", "chrome://favicon/", "history", "alarms", "notifications", "tabs", "storage", "activeTab", "declarativeContent", "webNavigation", "webRequest", "webRequestBlocking", "cookies" ]
+}
