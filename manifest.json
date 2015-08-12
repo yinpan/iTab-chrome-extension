@@ -1,16 +1,15 @@
 {  
-  "name": "Nice",
+  "name": "iTab",
   "chrome_url_overrides": {
-     "newtab": "index.html"
+     "newtab": "resources/index.html"
   },
   "manifest_version": 2,
-  "version": "0.1",  
-  "description": "定制导航",
-  "browser_action": {
-    "default_icon": "img/navigation.png" ,
-    "default_title": "My Navigation",
-    "default_popup": "popup.html"
+  "version": "1.0",
+  "icons": {
+    "128": "resources/img/icon_128.png",
+    "16": "resources/img/icon_16.png",
+    "32": "resources/img/icon_32.png"
   },
-  "options_page":"options.html",
+  "description": "定制个人导航页",
   "permissions": [ "background", "geolocation", "management", "topSites", "bookmarks", "unlimitedStorage", "topSites", "identity", "http://*/", "https://*/", "chrome://favicon/", "history", "alarms", "notifications", "tabs", "storage", "activeTab", "declarativeContent", "webNavigation", "webRequest", "webRequestBlocking", "cookies" ]
 }
