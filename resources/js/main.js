@@ -60,6 +60,23 @@ $(function () {
             window.localStorage.setItem("bookmark",JSON.stringify(storageJson));
         }
     }
+    var setBG= function () {
+        var deadline = localStorage.getItem("loadtime");
+        if(localStorage.getItem("imgUrl")&&deadline&&Date.now()-deadline<1800000){
+            $(".bgimg").css({
+                "background-image":"url("+ localStorage.getItem("imgUrl")+")"
+            });
+        }else{
+            var randomNum = parseInt(Math.random()*100)+1;
+            var imgUrl = "http://7xl5i2.com1.z0.glb.clouddn.com/img_"+randomNum+".jpg";
+            $(".bgimg").css({
+                "background-image":"url("+ imgUrl+")"
+            });
+            localStorage.setItem("imgUrl",imgUrl);
+            localStorage.setItem("loadtime",Date.now());
+        }
+    }
+    setBG();
     $("label.onoffswitch").click(function(){
         if($("#myonoffswitch").prop("checked") == true){
             $("#myonoffswitch").prop("checked",false);

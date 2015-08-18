@@ -18,7 +18,7 @@ html{
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* background: -webkit-radial-gradient(center, ellipse cover, #029CC9 0%, #005077 100%); */
+
 }
 body{
     width: 100%;
@@ -26,17 +26,25 @@ body{
     display: block;
     font-family: arial,helvetica,sans-serif;
     position: relative;
-    background: url(../img/background.jpg) no-repeat;
+    background-size: cover;
+    background: -webkit-radial-gradient(center, ellipse cover, #38ADCF 0%, #1B5D80 100%);
 }
 .bgimg{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    display: block;
+    z-index: 1;
+    background-size: cover;
+}
+.wrapper{
+    position: absolute;
+    z-index: 999;
     width: 100%;
     height: 100%;
-    background: url(../img/bg3.jpg) no-repeat;
-    /* z-index: 1; */
-    display: none;
+    display: block;
 }
 .header{
     width: 100%;
@@ -155,7 +163,7 @@ body{
     background-color: rgb(245, 250, 251);
 }
 .searchinput:focus + .searchIcon{
-    background-color: #1abc9c;
+    background-color: #5BDCC4;
 }
 .searchBox i.searchCorner{
     position: absolute;
@@ -381,7 +389,7 @@ input.save{
     top: 10px;
     cursor: pointer;
     transform: rotate(45deg);
-    z-index: 100;
+    z-index: 1100;
 }
 .mynav ul{
     display: block;

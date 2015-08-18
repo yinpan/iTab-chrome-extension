@@ -9,70 +9,72 @@
 </head>
 <body>
 	<div class="bgimg"></div>
-	<div class="header">
-		<div class="link">
-			<ul>
-				<li class="add">
-					<a title="apps"><img src="img/add_tag.png" alt="添加书签"/></a>
-				</li>
-				<li>
-					<a chrome-href="chrome://apps/" title="apps"><img src="img/apps.svg" alt="应用"/></a>
-				</li>
-				<li>
-					<a chrome-href="chrome://history/" title="history"><img src="img/history.svg" alt="历史"/></a>
-				</li>
-				<li>
-					<a chrome-href="chrome://bookmarks/#1" title="bookmarks"><img src="img/bookmark.svg" alt="书签管理"/></a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="container">
-		<div class="search">
-			<div class="searchengineBox">
-				<div class="searchChoose" id="searchengine" now="google">Google</div>
-				<i class="engineCorner"></i>
-				<div class="allSearchEngine">
-					<ul>
-						<li class="searchEngineitem" value="google">Google</li>
-						<li class="searchEngineitem" value="baidu">百度</li>
-						<li class="searchEngineitem" value="bing">bing</li>
-						<li class="searchEngineitem" value="haosou">好搜</li>
-					</ul>
-				</div>
-			</div>
-			<div class="searchBox">
-				<i class="searchCorner"></i>
-				<input type="text" class="searchinput" placeholder="search"/>
-				<div class="searchIcon" id="searchbtn">
-					<i class="search"></i>
-				</div>
-			</div>
-		</div>
-		<div class="navwrap">
-			<div class="onoffswitch-box">
-				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
-				<label class="onoffswitch">
-					<span class="onoffswitch-inner"></span>
-					<span class="onoffswitch-switch"></span>
-				</label>
-			</div>
-			<div class="mynav">
-				<div class="addmark hidden">
-					<label>名称：</label><input class="markbookName markbookinfo" id="markbookName" type="text"/>
-					<label>网址：</label><input class="markbookUrl markbookinfo" id="markbookUrl" placeholder="http://"
-						type="text" />
-					<input type="button" value="保存" id="save" class="save"/>
-					<div class="successtip hidden">
-						<span><i class="ok"></i>保存成功</span>
-					</div>
-					<i class="close">+</i>
-				</div>
-				<ul id="navlist">
-					<!--<li><a href="javascript:void(0)"><i class="add"><img class="favico" src="img/add.png" /></i><span class="name"></span></a></li>-->
+	<div class="wrapper">
+		<div class="header">
+			<div class="link">
+				<ul>
+					<li class="add">
+						<a title="添加书签"><img src="img/add_tag.png" alt="添加书签"/></a>
+					</li>
+					<li>
+						<a chrome-href="chrome://apps/" title="apps"><img src="img/apps.svg" alt="应用"/></a>
+					</li>
+					<li>
+						<a chrome-href="chrome://history/" title="history"><img src="img/history.svg" alt="历史"/></a>
+					</li>
+					<li>
+						<a chrome-href="chrome://bookmarks/#1" title="bookmarks"><img src="img/bookmark.svg" alt="书签管理"/></a>
+					</li>
 				</ul>
 			</div>
-			<div class="often"></div>
+		</div>
+		<div class="container">
+			<div class="search">
+				<div class="searchengineBox">
+					<div class="searchChoose" id="searchengine" now="baidu">Baidu</div>
+					<i class="engineCorner"></i>
+					<div class="allSearchEngine">
+						<ul>
+							<li class="searchEngineitem" value="google">Google</li>
+							<li class="searchEngineitem" value="baidu">百度</li>
+							<li class="searchEngineitem" value="bing">bing</li>
+							<li class="searchEngineitem" value="haosou">好搜</li>
+						</ul>
+					</div>
+				</div>
+				<div class="searchBox">
+					<i class="searchCorner"></i>
+					<input type="text" class="searchinput" placeholder="search"/>
+					<div class="searchIcon" id="searchbtn">
+						<i class="search"></i>
+					</div>
+				</div>
+			</div>
+			<div class="navwrap">
+				<div class="onoffswitch-box">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+					<label class="onoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+				<div class="mynav">
+					<div class="addmark hidden">
+						<label>名称：</label><input class="markbookName markbookinfo" id="markbookName" type="text"/>
+						<label>网址：</label><input class="markbookUrl markbookinfo" id="markbookUrl" placeholder="http://"
+												 type="text" />
+						<input type="button" value="保存" id="save" class="save"/>
+						<div class="successtip hidden">
+							<span><i class="ok"></i>保存成功</span>
+						</div>
+						<i class="close">+</i>
+					</div>
+					<ul id="navlist">
+						<!--<li><a href="javascript:void(0)"><i class="add"><img class="favico" src="img/add.png" /></i><span class="name"></span></a></li>-->
+					</ul>
+				</div>
+				<div class="often"></div>
+			</div>
 		</div>
 	</div>
 </body>

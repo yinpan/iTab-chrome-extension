@@ -1,10 +1,10 @@
-{  
+﻿{  
   "name": "iTab",
   "chrome_url_overrides": {
      "newtab": "resources/index.html"
   },
   "manifest_version": 2,
-  "version": "1.0",
+  "version": "1.1",
   "icons": {
     "128": "resources/img/icon_128.png",
     "16": "resources/img/icon_16.png",
