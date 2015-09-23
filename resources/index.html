@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script src="../lib/jquery-2.1.3.min.js"></script>
 	<script src="js/main.js"></script>
+	<!--<script src="http://suggestion.baidu.com/test.js"></script>-->
 </head>
 <body>
 	<div class="bgimg"></div>
@@ -44,10 +45,11 @@
 				</div>
 				<div class="searchBox">
 					<i class="searchCorner"></i>
-					<input type="text" class="searchinput" placeholder="search"/>
+					<input type="text" class="searchinput" id="searchInput" placeholder="search" name="word" autocomplete="off"/>
 					<div class="searchIcon" id="searchbtn">
 						<i class="search"></i>
 					</div>
+					<div class="suggest"></div>
 				</div>
 			</div>
 			<div class="navwrap">

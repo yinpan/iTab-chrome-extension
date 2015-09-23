@@ -11,6 +11,57 @@ $(function () {
     }
     var storage =window.localStorage.getItem("bookmark");
     var storageJson =JSON.parse(storage);
+    var searchInput =  $("#searchInput");
+    searchInput.unbind("keydown").bind("keydown",function(e){
+        if (e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 13) {
+            if (e.keyCode == 13) {
+                searchInput.focus();
+                $('.suggest').hide();
+                setTimeout(function () {
+                    search();
+                }, 200);
+                return false;
+            }
+            if ($('.suggest').css('display') != 'none') {
+                var index = $('.suggest li').get().indexOf($('.suggest li.selected').get(0));
+                if (e.keyCode == 38 || e.keyCode == 40) {
+                    var nextIndex = 0;
+                    if (index == -1) {
+                        if (e.keyCode == 38) {
+                            nextIndex = $('.suggest li').length - 1;
+                        }
+                    } else {
+                        nextIndex = e.keyCode == 38 ? (index - 1) : (index + 1);
+                    }
+                    $('.suggest li').removeClass('selected');
+                    var nextObj = $('.suggest li')[nextIndex];
+                    if (typeof nextObj != 'undefined') {
+                        $(nextObj).addClass('selected');
+                        searchInput.val($(nextObj).attr('keyword'));
+                    }
+                }
+            }
+        }
+    });
+    var loadSearch = function(){
+        var keyword = $("#searchInput").val()||"";
+        var self = searchInput;
+        if(keyword){
+            getBaiduSuggestion(self,keyword);
+        }
+    };
+    searchInput.unbind('keyup').bind('keyup',function(e){
+        if(e.keyCode ==  38 || e.keyCode == 40 || e.keyCode == 13 || e.keyCode==27){
+            if(e.keyCode==27){
+                $('.suggest').hide();
+            }
+            return false;
+        }
+        loadSearch();
+    });
+    searchInput.on('webkitspeechchange',function(){
+        loadSearch();
+    });
     var bookmark = {
         init: function(){
             this.load();
@@ -121,6 +172,15 @@ $(function () {
     $(".link a[chrome-href]").click(function(){
         chrome.tabs.create({url: $(this).attr("chrome-href")});
     })
+    if($(".searchinput").val()!=""){
+
+    }
+    $(".searchinput").change(function(){
+        loadsuggest();
+    })
+    $(document).bind('click',function(){
+        $('.suggest').hide();
+    });
     bookmark.init();
 })
 
@@ -130,6 +190,7 @@ function enterSearch(event){
         search();
     }
 }
+
 function search(){
     var searchtool = $("#searchengine").attr("now");
     var value = spacereg($(".searchinput").val());
@@ -147,6 +208,7 @@ function search(){
         }
     }
 }
+
 function spacereg(value){
     var arr = new Array();
     arr= value.split(" ");
@@ -159,3 +221,97 @@ function spacereg(value){
     }
     return value;
 };
+
+function loadsuggest(){
+
+}
+function getSuggestion(self,keyword){
+    $.getJSON("https://www.google.com.hk/complete/search?client=hp&hl=zh-CN&gs_nf=3&cp=7&gs_id=qv&q=" + encodeURIComponent(keyword) + "&xhr=t",function(data) {
+        if(keyword!=self.val()){
+            $('.suggest').hide();
+            return;
+        }
+        if(data){
+            try{
+                if(data[1].length > 0){
+                    var suggestContent = '<ul>';
+                    $.each(data[1], function(i,n){
+                        suggestContent += '<li keyword="' + n[0] + '">' + n[0].replace(keyword,'<label>' + keyword + '</label>') + '</li>';
+                    });
+                    suggestContent += '</ul>';
+                    if($('.suggest').css('display') == 'none'){
+                        $('.suggest').show();
+                    }
+                    $('.suggest').html(suggestContent);
+                    $('.suggest li').unbind('click').bind('click',function(){
+                        self.val($(this).attr('keyword'));
+                        self.focus();
+                        $('.suggest').hide();
+                        setTimeout(function(){
+                            search();
+                        },200);
+                    }).unbind('mouseover').bind('mouseover',function(){
+                        $('.suggest li').removeClass('selected');
+                        $(this).addClass('selected');
+                    });
+                }else{
+                    $('.suggest').hide();
+                }
+            }catch(err){
+                $('.suggest').hide();
+            }
+        }else{
+            $('.suggest').hide();
+        }
+    }).error(function() { $('.suggest').hide(); });
+}
+
+function getBaiduSuggestion(self,keyword){
+    $.ajax({
+        url:"http://suggestion.baidu.com/su?wd=" + encodeURIComponent(keyword) + "&p=3&t=" + new Date().getTime()+"&cb=cbackc",
+        dataType:'text',
+        error:function() {
+            $('.suggest').hide();
+        },
+        success:function(data){
+            if(keyword!=self.val()||!data){
+                $('.suggest').hide();
+                return;
+            }
+            try{
+                data = data.match(/cbackc\((.*)\);/)[1];
+                try {
+                    data = window.eval('(' + data + ')');
+                } catch (err1) {
+                    data = JSON.parse(data);
+                }
+                if(data.s.length > 0){
+                    var suggestContent = '<ul>';
+                    $.each(data.s, function(i,n){
+                        suggestContent += '<li keyword="' + n + '">' + n.replace(keyword,'<label>' + keyword + '</label>') + '</li>';
+                    });
+                    suggestContent += '</ul>';
+                    if($('.suggest').css('display') == 'none'){
+                        $('.suggest').show();
+                    }
+                    $('.suggest').html(suggestContent);
+                    $('.suggest li').unbind('click').bind('click',function(){
+                        self.val($(this).attr('keyword'));
+                        self.focus();
+                        $('.suggest').hide();
+                        setTimeout(function(){
+                            search();
+                        },200);
+                    }).unbind('mouseover').bind('mouseover',function(){
+                        $('.suggest li').removeClass('selected');
+                        $(this).addClass('selected');
+                    });
+                }else{
+                    $('.suggest').hide();
+                }
+            }catch(err){
+                $('.suggest').hide();
+            }
+        }
+    });
+}
