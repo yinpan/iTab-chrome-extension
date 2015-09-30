@@ -9,9 +9,18 @@ $(function () {
         ];
         localStorage.setItem("bookmark",JSON.stringify(initDta));
     }
+    if(!window.localStorage.getItem("engine")){
+        localStorage.setItem("engine","baidu");
+    }
     var storage =window.localStorage.getItem("bookmark");
     var storageJson =JSON.parse(storage);
     var searchInput =  $("#searchInput");
+
+    // 加载默认引擎
+    $("#searchengine").attr({
+        "now": localStorage.getItem("engine"),
+        "class":"searchChoose s-" + localStorage.getItem("engine")
+    })
     searchInput.unbind("keydown").bind("keydown",function(e){
         if (e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 13) {
             if (e.keyCode == 13) {
@@ -119,7 +128,7 @@ $(function () {
             });
         }else{
             var randomNum = parseInt(Math.random()*100)+1;
-            var imgUrl = "http://7xl5i2.com1.z0.glb.clouddn.com/img_"+randomNum+".jpg";
+            var imgUrl = "https://dn-itab.qbox.me/img_"+randomNum+".jpg";
             $(".bgimg").css({
                 "background-image":"url("+ imgUrl+")"
             });
@@ -181,6 +190,26 @@ $(function () {
     $(document).bind('click',function(){
         $('.suggest').hide();
     });
+    $(".searchEngineitem").on("click",function(){
+        var engine = $(this).attr("value");
+        $("#searchengine").attr({
+            "now":engine,
+            "class":"searchChoose s-"+engine
+        })
+        $(".allSearchEngine").hide();
+        $(".engineCorner").css("transform","rotate(0deg)");
+        window.localStorage.setItem("engine",engine);
+    })
+    $(".engineCorner").on("click", function () {
+        var isShow = $(".allSearchEngine").css("display");
+        if( isShow == 'none'){
+            $(".allSearchEngine").show();
+            $(this).css("transform","rotate(180deg)");
+        }else{
+            $(".allSearchEngine").hide();
+            $(this).css("transform","rotate(0deg)");
+        }
+    })
     bookmark.init();
 })
 
