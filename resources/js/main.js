@@ -154,8 +154,8 @@ $(function () {
         bookmark.add();
     })
     $("#navlist").on("click",".delete",function(){
-        var index = $(this).index();
-        bookmark.delete(index - 1);
+        var index = $(this).parent().index();
+        bookmark.delete(index);
         $(this).parent().remove();
     })
     $(".searchinput").keydown(function(event){
@@ -226,13 +226,12 @@ function search(){
     var searchEngine=[
         {"engine":"google","search":"https://www.google.com/?gws_rd=ssl#q="},
         {"engine":"bing","search":"https://www.bing.com/search?q="},
-        {"engine":"haosou","search":"http://www.haosou.com/s?q="},
         {"engine":"baidu","search":"https://www.baidu.com/s?wd="}
     ];
     if(value){
         for(var i=0;i<searchEngine.length;i++){
             if(searchtool==searchEngine[i].engine){
-                location.href =searchEngine[i].search+value;
+                location.href =searchEngine[i].search+encodeURIComponent(value);
             }
         }
     }

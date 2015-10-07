@@ -265,7 +265,7 @@ body{
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     transition: .2s;
-    background-color: #F5FAFB;
+    background-color: #FFFFFF;
 }
 .searchBox i.search{
     display: block;
