@@ -120,23 +120,9 @@ $(function () {
             window.localStorage.setItem("bookmark",JSON.stringify(storageJson));
         }
     }
-    var setBG= function () {
-        var deadline = localStorage.getItem("loadtime");
-        if(localStorage.getItem("imgUrl")&&deadline&&Date.now()-deadline<1800000){
-            $(".bgimg").css({
-                "background-image":"url("+ localStorage.getItem("imgUrl")+")"
-            });
-        }else{
-            var randomNum = parseInt(Math.random()*100)+1;
-            var imgUrl = "https://dn-itab.qbox.me/img_"+randomNum+".jpg";
-            $(".bgimg").css({
-                "background-image":"url("+ imgUrl+")"
-            });
-            localStorage.setItem("imgUrl",imgUrl);
-            localStorage.setItem("loadtime",Date.now());
-        }
-    }
-    setBG();
+
+    getBingImage();
+    setITabBackgroundImage();
     $("label.onoffswitch").click(function(){
         if($("#myonoffswitch").prop("checked") == true){
             $("#myonoffswitch").prop("checked",false);
@@ -222,9 +208,10 @@ function enterSearch(event){
 
 function search(){
     var searchtool = $("#searchengine").attr("now");
-    var value = spacereg($(".searchinput").val());
+    // var value = spacereg($(".searchinput").val());
+    var value = $(".searchinput").val();
     var searchEngine=[
-        {"engine":"google","search":"https://www.google.com/?gws_rd=ssl#q="},
+        {"engine":"google","search":"https://www.google.com/search?q="},
         {"engine":"bing","search":"https://www.bing.com/search?q="},
         {"engine":"baidu","search":"https://www.baidu.com/s?wd="}
     ];
@@ -243,16 +230,14 @@ function spacereg(value){
     if(arr.length>=2){
         var newValue=arr[0];
         for(var i=1;i<arr.length;i++){
-            newValue +="+"+arr[i];
+            newValue +="%20"+arr[i];
         }
         value =newValue;
     }
     return value;
 };
 
-function loadsuggest(){
 
-}
 function getSuggestion(self,keyword){
     $.getJSON("https://www.google.com.hk/complete/search?client=hp&hl=zh-CN&gs_nf=3&cp=7&gs_id=qv&q=" + encodeURIComponent(keyword) + "&xhr=t",function(data) {
         if(keyword!=self.val()){
@@ -342,4 +327,62 @@ function getBaiduSuggestion(self,keyword){
             }
         }
     });
+ }
+
+ function getBingImage() {
+
+     // BIng (GET http://cn.bing.com/HPImageArchive.aspx)
+
+     $.ajax({
+         url: "http://cn.bing.com/HPImageArchive.aspx",
+         type: "GET",
+         data: {
+             "format": "js",
+             "idx": "0",
+             "n": "1",
+         },
+     })
+         .done(function(data, textStatus, jqXHR) {
+             console.log("HTTP Request Succeeded: " + jqXHR.status);
+             console.log(data);
+             if(data.images){
+                 var url = data.images[0].url;
+                 if(url) {
+                     setBackgroundImage("http://cn.bing.com/" + url);
+                 }
+             }
+
+         })
+         .fail(function(jqXHR, textStatus, errorThrown) {
+             console.log("HTTP Request Failed");
+         })
+         .always(function() {
+             /* ... */
+         });
+
+ }
+
+function setITabBackgroundImage() {
+    var deadline = localStorage.getItem("loadtime");
+    if(localStorage.getItem("imgUrl")&&deadline&&Date.now()-deadline<1800000){
+        $(".bgimg").css({
+            "background-image":"url("+ localStorage.getItem("imgUrl")+")"
+        });
+    }else{
+        getBingImage();
+    }
+}
+
+function setBackgroundImage(imageUrl) {
+
+    if (!imageUrl){
+        var randomNum = parseInt(Math.random()*100)+1;
+        imageUrl = "http://7xl5i2.com1.z0.glb.clouddn.com/img_"+randomNum+".jpg";
+    }
+
+    $(".bgimg").css({
+        "background-image":"url("+ imageUrl+")"
+    });
+    localStorage.setItem("imgUrl",imageUrl);
+    localStorage.setItem("loadtime",Date.now());
 }

@@ -5,7 +5,7 @@
   },
   "content_security_policy": "script-src 'self'  chrome-extension://mehbnnilpnkmapfgfdpdiadpcbndnplh/lib/opensug.js https://cdn.fsanalytics.net 'unsafe-eval' ; object-src 'self'",
   "manifest_version": 2,
-  "version": "1.2.1",
+  "version": "1.2.3",
   "icons": {
     "128": "resources/img/icon_128.png",
     "16": "resources/img/icon_16.png",

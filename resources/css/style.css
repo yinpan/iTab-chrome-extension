@@ -56,8 +56,9 @@ body{
     width: 240px;
     float: right;
     background-color: rgba(255, 255, 255, 0.45);
-    margin: 7px 7px 0 0;
+    margin: 0px -26px 0 0;
     border-radius: 5px;
+    transform: scale(0.7,0.7);
 }
 .link ul{
     list-style: none;
@@ -418,6 +419,7 @@ input.save{
     height: 30px;
     line-height: 33px;
     text-align: center;
+    border-radius: 3px;
     /* border: 1px solid rgb(194, 194, 194); */
     /* border-bottom-width: 3px; */
 }
