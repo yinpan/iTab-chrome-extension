@@ -32,7 +32,6 @@ iTab是一款基于Html5的Chrome浏览器扩展应用。它提供了网站快�
 
 
 ##截图
-![](http://7xs8gf.com1.z0.glb.clouddn.com/iTab_v1.2.3_02.png)
-![](http://7xs8gf.com1.z0.glb.clouddn.com/iTab_v1.2.3_01.png)
+![iTab](./resources⁩/⁨screenshot⁩/itab.png)
 
 
